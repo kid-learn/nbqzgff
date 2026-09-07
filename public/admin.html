@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Admin &middot; NABARD Pavilion Quiz</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="admin">
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-sprout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 21v-8"/><path d="M12 13C12 9 9 6 5 6c0 4 3 7 7 7z"/><path d="M12 13c0-3.5 2.7-6 6-6 0 3.5-2.7 6-6 6z"/>
+  </symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>
+  </symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10.6 6.1A8.9 8.9 0 0 1 12 6c6.4 0 10 6 10 6a17 17 0 0 1-3 3.6"/>
+    <path d="M6.6 6.7A16.6 16.6 0 0 0 2 12s3.6 6 10 6a9.7 9.7 0 0 0 4.4-1"/>
+    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/><path d="m3 3 18 18"/>
+  </symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6z"/><rect x="9.5" y="10.5" width="5" height="4" rx="1"/><path d="M10.7 10.5V9.3a1.3 1.3 0 0 1 2.6 0v1.2"/>
+  </symbol>
+</svg>
+
+<!-- login -->
+<div class="a-shell" id="login-shell">
+  <div class="a-head" style="justify-content:center;text-align:center;display:block;padding:26px 18px">
+    <svg width="26" height="26" style="color:var(--mint)" aria-hidden="true"><use href="#i-shield"/></svg>
+    <h1 style="margin-top:8px">Admin sign in</h1>
+    <p class="who">NABARD Pavilion &middot; GFF 2026</p>
+  </div>
+  <div class="a-body">
+    <div class="card">
+      <label for="li-user">User ID</label>
+      <input type="text" id="li-user" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="admin">
+      <label for="li-pass">Password</label>
+      <input type="password" id="li-pass" autocomplete="current-password">
+      <div class="btn-row">
+        <button class="abtn" id="li-go" style="flex:1">Sign in</button>
+      </div>
+      <div id="li-note"></div>
+    </div>
+    <div class="btn-row">
+      <button class="abtn sec" id="li-back">Back to launcher</button>
+    </div>
+  </div>
+</div>
+
+<!-- panel -->
+<div class="a-shell" id="panel-shell" hidden>
+  <div class="a-head">
+    <div>
+      <h1 id="panel-title">Reports</h1>
+      <p class="who">Signed in as <span id="who-name">admin</span></p>
+    </div>
+    <button class="abtn sec sm" id="btn-logout" style="color:#fff;border-color:var(--mint)">Sign out</button>
+  </div>
+
+  <div class="a-tabs" role="tablist">
+    <button class="a-tab on" data-panel="p-reports" role="tab">Reports</button>
+    <button class="a-tab" data-panel="p-questions" role="tab">Questions</button>
+    <button class="a-tab" data-panel="p-feedback" role="tab">Feedback</button>
+    <button class="a-tab" data-panel="p-branding" role="tab">Branding</button>
+    <button class="a-tab" data-panel="p-settings" role="tab">Settings</button>
+    <button class="a-tab" data-panel="p-security" role="tab">Security</button>
+  </div>
+
+  <div class="a-body">
+
+    <section class="panel on" id="p-reports">
+      <div class="card">
+        <h2>At a glance</h2>
+        <div class="metrics" id="rep-metrics"></div>
+        <h2 style="margin-top:16px">Attempts by hour</h2>
+        <div class="bars" id="rep-bars"></div>
+        <div class="bar-labels"><span id="rep-hour-from"></span><span id="rep-hour-to"></span></div>
+      </div>
+      <div class="card">
+        <h2>Question difficulty</h2>
+        <table class="rep" id="rep-questions"><tbody></tbody></table>
+        <p class="hint">Sorted by lowest correct rate. A very low rate may mean the question is unclear.</p>
+      </div>
+      <div class="card">
+        <h2>Feedback ratings</h2>
+        <div id="rep-feedback"></div>
+      </div>
+      <div class="card">
+        <h2>Download reports</h2>
+        <div class="btn-row">
+          <button class="abtn sec sm" data-export="attempts">Attempts CSV</button>
+          <button class="abtn sec sm" data-export="feedback">Feedback CSV</button>
+          <button class="abtn sec sm" data-export="questions">Questions CSV</button>
+          <button class="abtn sec sm" data-export="audit">Access log CSV</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Reset data</h2>
+        <p class="hint" style="margin-top:0">Permanently deletes recorded quiz attempts and feedback responses. The question bank, settings, wallpapers and logo are not affected. This cannot be undone — download a CSV backup first if you might need the numbers later.</p>
+        <label for="reset-password">Your password</label>
+        <input type="password" id="reset-password" autocomplete="current-password">
+        <div class="btn-row">
+          <button class="abtn warn sm" id="reset-attempts">Reset quiz attempts</button>
+          <button class="abtn warn sm" id="reset-feedback">Reset feedback</button>
+          <button class="abtn warn sm" id="reset-both">Reset both</button>
+        </div>
+        <div id="reset-note"></div>
+      </div>
+      <div class="card">
+        <h2>Recent activity</h2>
+        <div class="log" id="rep-audit"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="p-questions">
+      <div class="card">
+        <h2 id="q-form-title">Add a question</h2>
+        <label for="qf-text">Question</label>
+        <textarea id="qf-text" maxlength="400"></textarea>
+        <div id="qf-options"></div>
+        <label for="qf-correct">Correct option</label>
+        <select id="qf-correct">
+          <option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option>
+        </select>
+        <label for="qf-cat">Category</label>
+        <input type="text" id="qf-cat" maxlength="40" placeholder="Foundation">
+        <label style="display:flex;align-items:center;gap:9px;margin-top:14px">
+          <input type="checkbox" id="qf-active" checked style="width:auto"> Include this question in the draw
+        </label>
+        <div class="btn-row">
+          <button class="abtn" id="qf-save">Save question</button>
+          <button class="abtn sec" id="qf-clear">Clear</button>
+        </div>
+        <div id="qf-note"></div>
+      </div>
+      <div class="card">
+        <h2><span id="q-count">0</span> questions in the bank</h2>
+        <input type="text" id="q-search" placeholder="Search questions">
+        <div id="q-list" style="margin-top:8px"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="p-feedback">
+      <div class="card">
+        <h2 id="f-form-title">Add a feedback question</h2>
+        <label for="ff-text">Question</label>
+        <textarea id="ff-text" maxlength="300"></textarea>
+        <label style="display:flex;align-items:center;gap:9px;margin-top:14px">
+          <input type="checkbox" id="ff-active" checked style="width:auto"> Show this question to participants
+        </label>
+        <div class="btn-row">
+          <button class="abtn" id="ff-save">Save question</button>
+          <button class="abtn sec" id="ff-clear">Clear</button>
+        </div>
+        <div id="ff-note"></div>
+      </div>
+      <div class="card">
+        <h2>Feedback questions</h2>
+        <div id="f-list"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="p-branding">
+      <div class="card">
+        <h2>NABARD logo</h2>
+        <p class="hint" style="margin-top:0">Uploaded once here and used on every screen that shows the logo: launcher, home, quiz header and results.</p>
+        <div id="logo-preview" style="margin:12px 0"></div>
+        <label class="dropzone" for="logo-file" style="display:block;cursor:pointer">
+          Tap to choose a logo (PNG, JPG, WEBP or SVG, up to 6 MB)
+          <input type="file" id="logo-file" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>
+        </label>
+        <div class="btn-row">
+          <button class="abtn sec sm" id="logo-remove">Remove logo</button>
+        </div>
+        <div id="logo-note"></div>
+      </div>
+      <div class="card">
+        <h2>Home wallpapers</h2>
+        <div class="thumbs" id="wall-list"></div>
+        <label class="dropzone" for="wall-file" style="display:block;cursor:pointer;margin-top:12px">
+          Tap to add a wallpaper
+          <input type="file" id="wall-file" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>
+        </label>
+        <label for="set-cycle">Cycle every (seconds)</label>
+        <input type="number" id="set-cycle" min="2" max="120">
+        <div class="btn-row">
+          <button class="abtn" id="cycle-save">Save cycling</button>
+        </div>
+        <div id="wall-note"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="p-settings">
+      <div class="card">
+        <h2>Quiz parameters</h2>
+        <div class="row2">
+          <div>
+            <label for="set-count">Questions per attempt</label>
+            <input type="number" id="set-count" min="1" max="50">
+          </div>
+          <div>
+            <label for="set-threshold">Pass threshold</label>
+            <input type="number" id="set-threshold" min="0" max="50">
+          </div>
+        </div>
+        <div class="row2">
+          <div>
+            <label for="set-idle">Idle reset (seconds)</label>
+            <input type="number" id="set-idle" min="15" max="600">
+          </div>
+          <div>
+            <label for="set-thanks">Thank you screen (seconds)</label>
+            <input type="number" id="set-thanks" min="2" max="60">
+          </div>
+        </div>
+        <div id="threshold-warn"></div>
+      </div>
+      <div class="card">
+        <h2>Screen text</h2>
+        <label for="set-title">Home heading</label>
+        <input type="text" id="set-title" maxlength="120">
+        <label for="set-subtitle">Home subheading</label>
+        <input type="text" id="set-subtitle" maxlength="160">
+        <label for="set-congrats">Message when a participant passes</label>
+        <textarea id="set-congrats" maxlength="300"></textarea>
+        <label for="set-consolation">Message when a participant does not pass</label>
+        <textarea id="set-consolation" maxlength="300"></textarea>
+        <label style="display:flex;align-items:center;gap:9px;margin-top:14px">
+          <input type="checkbox" id="set-requireall" style="width:auto"> Require every feedback question to be rated
+        </label>
+        <div class="btn-row">
+          <button class="abtn" id="set-save">Save settings</button>
+        </div>
+        <div id="set-note"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="p-security">
+      <div class="card">
+        <h2>Change your password</h2>
+        <label for="pw-current">Current password</label>
+        <input type="password" id="pw-current" autocomplete="current-password">
+        <label for="pw-next">New password</label>
+        <input type="password" id="pw-next" autocomplete="new-password">
+        <label for="pw-confirm">Confirm new password</label>
+        <input type="password" id="pw-confirm" autocomplete="new-password">
+        <label>Enter your 4-digit OTP to confirm</label>
+        <div class="otp-row" id="otp-row">
+          <input type="password" inputmode="numeric" maxlength="1" aria-label="OTP digit 1">
+          <input type="password" inputmode="numeric" maxlength="1" aria-label="OTP digit 2">
+          <input type="password" inputmode="numeric" maxlength="1" aria-label="OTP digit 3">
+          <input type="password" inputmode="numeric" maxlength="1" aria-label="OTP digit 4">
+        </div>
+        <div class="note warn">The OTP is a fixed code held by the account owner, not sent by SMS. Treat it as a second password.</div>
+        <div class="btn-row">
+          <button class="abtn" id="pw-save">Update password</button>
+        </div>
+        <div id="pw-note"></div>
+      </div>
+      <div class="card">
+        <h2>Display unlock code</h2>
+        <p class="hint" style="margin-top:0">The six-digit code staff enter to put a terminal into display mode. Changing it signs out every terminal.</p>
+        <label for="kc-code">New 6-digit code</label>
+        <input type="password" id="kc-code" inputmode="numeric" maxlength="6" autocomplete="off">
+        <label for="kc-pass">Your password</label>
+        <input type="password" id="kc-pass" autocomplete="current-password">
+        <div class="btn-row">
+          <button class="abtn" id="kc-save">Update code</button>
+        </div>
+        <div id="kc-note"></div>
+      </div>
+      <div class="card" id="super-card" hidden>
+        <h2>Super user tools</h2>
+        <p class="hint" style="margin-top:0">Visible only when signed in as xadmin. Lets you recover the admin account without needing its current password — for when admin is locked out.</p>
+
+        <h3 style="font-size:14px;margin:14px 0 2px;color:var(--ink)">Overwrite admin's password</h3>
+        <label for="su-new">New password for admin</label>
+        <input type="password" id="su-new" autocomplete="new-password">
+        <label for="su-confirm">Confirm new password</label>
+        <input type="password" id="su-confirm" autocomplete="new-password">
+        <label for="su-pass">Your xadmin password</label>
+        <input type="password" id="su-pass" autocomplete="current-password">
+        <label>Your xadmin OTP</label>
+        <div class="otp-row" id="su-otp-row">
+          <input type="password" inputmode="numeric" maxlength="1" aria-label="Your OTP digit 1">
+          <input type="password" inputmode="numeric" maxlength="1" aria-label="Your OTP digit 2">
+          <input type="password" inputmode="numeric" maxlength="1" aria-label="Your OTP digit 3">
+          <input type="password" inputmode="numeric" maxlength="1" aria-label="Your OTP digit 4">
+        </div>
+        <div class="note warn">This signs admin out of any active session and replaces their password immediately. Make sure admin knows the new one.</div>
+        <div class="btn-row">
+          <button class="abtn warn" id="su-save">Overwrite admin's password</button>
+        </div>
+        <div id="su-note"></div>
+
+        <h3 style="font-size:14px;margin:20px 0 2px;color:var(--ink)">Restore the default display code</h3>
+        <p class="hint" style="margin-top:0">Resets the six-digit kiosk unlock code back to the documented default in one step.</p>
+        <label for="su-code-pass">Your xadmin password</label>
+        <input type="password" id="su-code-pass" autocomplete="current-password">
+        <div class="btn-row">
+          <button class="abtn warn sm" id="su-code-reset">Restore default code</button>
+        </div>
+        <div id="su-code-note"></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="/admin.js"></script>
+</body>
+</html>

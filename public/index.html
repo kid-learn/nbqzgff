@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>NABARD Pavilion Quiz</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="kiosk">
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-sprout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 21v-8"/><path d="M12 13C12 9 9 6 5 6c0 4 3 7 7 7z"/><path d="M12 13c0-3.5 2.7-6 6-6 0 3.5-2.7 6-6 6z"/>
+  </symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+  </symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2V21a2 2 0 1 1-4 0v-.1A1.7 1.7 0 0 0 7 19.4a1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 14a1.7 1.7 0 0 0-1.6-1H1a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 3 7.6a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 9 3V2a2 2 0 1 1 4 0v.1A1.7 1.7 0 0 0 16.4 3a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1H23a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" transform="translate(0.6 0.6) scale(0.95)"/>
+  </symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9"/><path d="M12 8v13"/>
+    <path d="M12 8S10.5 3 8 3a2.5 2.5 0 0 0 0 5z"/><path d="M12 8s1.5-5 4-5a2.5 2.5 0 0 1 0 5z"/>
+  </symbol>
+  <symbol id="i-seed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 21v-7"/><path d="M12 14C7 14 4 11 4 6c5 0 8 3 8 8z"/><path d="M12 14c0-4 2.5-7 7-7 0 4-2.5 7-7 7z"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 6 9 17l-5-5"/>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor">
+    <path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"/>
+  </symbol>
+  <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>
+  </symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 6 6 18"/><path d="M6 6l12 12"/>
+  </symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>
+    <path d="M12 9v4"/><path d="M12 17h.01"/>
+  </symbol>
+</svg>
+
+<main class="app" id="app">
+
+  <!-- 1. launcher -->
+  <section class="screen on" id="s-launcher" aria-label="Terminal launcher">
+    <div class="grow center pad">
+      <div class="mark"><svg width="30" height="30" aria-hidden="true"><use href="#i-sprout"/></svg></div>
+      <div class="logo-wrap" id="logo-launcher"></div>
+      <p class="sub on-dark-soft" style="margin:8px 0 0">Pavilion quiz terminal</p>
+      <div style="width:100%;margin-top:40px">
+        <button class="btn btn-gold" id="go-display">Display</button>
+        <button class="btn btn-outline" id="go-admin">Admin</button>
+      </div>
+    </div>
+    <p class="term-note">Global Fintech Festival 2026 &middot; terminal <span id="term-name">1</span></p>
+  </section>
+
+  <!-- 2. unlock -->
+  <section class="screen" id="s-lock" aria-label="Display unlock">
+    <div class="grow center pad">
+      <svg width="26" height="26" class="on-dark-soft" aria-hidden="true"><use href="#i-lock"/></svg>
+      <p class="sub on-dark" style="margin:10px 0 0">Enter display code</p>
+      <div class="dots" id="lock-dots" role="status" aria-live="polite" aria-label="Code entry progress"></div>
+      <div style="width:100%;max-width:300px">
+        <div class="keys" id="lock-keys"></div>
+      </div>
+      <p class="lock-msg" id="lock-msg" role="alert"></p>
+    </div>
+    <div class="pad" style="padding-bottom:22px">
+      <button class="btn btn-outline" id="lock-back">Back</button>
+    </div>
+  </section>
+
+  <!-- 3. home -->
+  <section class="screen" id="s-home" aria-label="Home">
+    <div id="walls"></div>
+    <div class="home-scrim"></div>
+    <button class="gear" id="home-gear" aria-label="Admin settings">
+      <svg width="20" height="20" aria-hidden="true"><use href="#i-gear"/></svg>
+    </button>
+    <div class="grow center pad home-inner">
+      <div class="logo-chip" id="logo-home"></div>
+      <h1 class="title on-dark" id="home-title" style="margin-top:22px">Welcome to NABARD's Pavilion</h1>
+      <p class="sub on-dark" id="home-sub" style="margin:10px 0 0">Take a quiz and win goodies!</p>
+      <div style="width:100%;margin-top:34px">
+        <button class="btn btn-green" id="go-quiz">Quiz</button>
+        <button class="btn btn-white" id="go-feedback">Feedback</button>
+      </div>
+    </div>
+    <div class="wall-dots" id="wall-dots"></div>
+  </section>
+
+  <!-- 4. quiz -->
+  <section class="screen on-green" id="s-quiz" aria-label="Quiz">
+    <div class="quiz-bar">
+      <div style="display:flex;align-items:center;gap:9px;min-width:0">
+        <button class="quiz-exit" id="quiz-exit" aria-label="Exit quiz">
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+        <span class="logo-wrap" id="logo-quiz"></span>
+      </div>
+      <span class="counter" id="q-counter">1 of 10</span>
+    </div>
+    <div class="progress"><i id="q-progress" style="width:0%"></i></div>
+    <div class="q-band" id="q-text" role="status" aria-live="polite"></div>
+    <div class="opts" id="q-opts" role="radiogroup" aria-label="Answer options"></div>
+    <div class="grow"></div>
+    <p class="err" id="q-err" role="alert"></p>
+    <div class="pad" style="padding-bottom:22px;padding-top:6px">
+      <button class="btn btn-green" id="q-submit">Submit</button>
+    </div>
+    <div class="exit-overlay" id="exit-overlay" hidden>
+      <div class="exit-card">
+        <div class="exit-badge"><svg width="26" height="26" aria-hidden="true"><use href="#i-alert"/></svg></div>
+        <h2>Exit the quiz?</h2>
+        <p>Exiting now will lose your progress. Your answers so far will not be saved.</p>
+        <button class="btn btn-green" id="exit-cancel">Continue quiz</button>
+        <button class="btn btn-outline-dark" id="exit-confirm">Exit to home</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. result -->
+  <section class="screen" id="s-result" aria-label="Result">
+    <div class="grow center pad">
+      <div class="badge-round" id="res-badge"></div>
+      <h1 class="title on-dark" id="res-title" style="margin-top:18px"></h1>
+      <p class="sub on-dark-soft" id="res-msg" style="margin:12px 0 0"></p>
+      <div class="score-box">
+        <div class="tiny on-dark-soft">Your score</div>
+        <div class="score-num" id="res-score">0 / 0</div>
+      </div>
+    </div>
+    <div class="pad" style="padding-bottom:22px">
+      <button class="btn btn-gold" id="res-next">Share feedback</button>
+    </div>
+  </section>
+
+  <!-- 6. feedback -->
+  <section class="screen on-green" id="s-feedback" aria-label="Feedback">
+    <div class="fb-head">
+      <h1 class="title on-dark" style="font-size:22px">Share your feedback</h1>
+      <p class="tiny on-dark-soft" style="margin:5px 0 0">Tap the stars to rate each question</p>
+    </div>
+    <div class="fb-list" id="fb-list"></div>
+    <div class="grow"></div>
+    <p class="err" id="fb-err" role="alert"></p>
+    <div class="pad" style="padding-bottom:22px;padding-top:4px">
+      <button class="btn btn-green" id="fb-submit">Submit</button>
+      <button class="btn btn-white" id="fb-skip">Skip</button>
+    </div>
+  </section>
+
+  <!-- 7. thank you -->
+  <section class="screen" id="s-thanks" aria-label="Thank you">
+    <div class="grow center pad">
+      <div class="tick"><svg width="34" height="34" style="color:#04342C" aria-hidden="true"><use href="#i-check"/></svg></div>
+      <h1 class="title on-dark" style="margin-top:18px">Thank you</h1>
+      <p class="sub on-dark-soft" id="thanks-msg" style="margin:10px 0 0">Your response has been recorded. Enjoy the festival!</p>
+    </div>
+    <div style="padding-bottom:26px;text-align:center">
+      <p class="tiny on-dark-soft" id="thanks-count" style="margin:0"></p>
+      <div class="countdown"><i id="thanks-bar"></i></div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/kiosk.js"></script>
+</body>
+</html>

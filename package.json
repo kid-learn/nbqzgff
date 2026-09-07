@@ -1,0 +1,11 @@
+{
+  "name": "nabard-pavilion-quiz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kiosk quiz and feedback application for the NABARD pavilion at Global Fintech Festival 2026",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": { "node": ">=18" }
+}

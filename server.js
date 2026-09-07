@@ -317,7 +317,7 @@ async function serveStatic(res, dir, rel, cache) {
     send(res, 200, data, {
       'Content-Type': type,
       'Cache-Control': cache || 'no-store',
-      'Content-Security-Policy': "default-src 'self'; style-src 'self','unsafe-inline'; img-src 'self' data:"
+      'Content-Security-Policy': "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
     });
   } catch (_) {
     send(res, 404, 'not found');
